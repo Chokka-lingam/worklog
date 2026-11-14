@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { getRequiredEnv } from "@/lib/env";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
