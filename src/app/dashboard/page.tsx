@@ -1,6 +1,7 @@
 import { AlertCircle, CheckCircle2, Clock3, ListTodo, Target } from "lucide-react";
 
 import { AddTaskForm } from "@/components/add-task-form";
+import { TaskActionButton } from "@/components/task-action-button";
 import { createTask, deleteTask, updateTaskStatus } from "@/lib/tasks";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
@@ -260,9 +261,9 @@ export default async function DashboardPage({
                             <option value="completed">Completed</option>
                             <option value="cancelled">Cancelled</option>
                           </select>
-                          <Button type="submit" variant="secondary" size="sm" className="w-full">
+                          <TaskActionButton variant="secondary" size="sm" className="w-full" pendingLabel="Updating...">
                             Update
-                          </Button>
+                          </TaskActionButton>
                         </form>
                       </td>
                       <td className="border border-slate-200 px-2 py-2 align-top text-slate-700">
@@ -283,9 +284,9 @@ export default async function DashboardPage({
                       <td className="border border-slate-200 px-2 py-2 align-top text-slate-700">
                         <form action={deleteTask}>
                           <input type="hidden" name="taskId" value={task.id} />
-                          <Button type="submit" variant="secondary" size="sm">
+                          <TaskActionButton variant="secondary" size="sm" pendingLabel="Deleting...">
                             Delete
-                          </Button>
+                          </TaskActionButton>
                         </form>
                       </td>
                     </tr>
