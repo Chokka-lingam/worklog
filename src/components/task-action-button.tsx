@@ -2,13 +2,13 @@
 
 import { useFormStatus } from "react-dom";
 
-import { Button } from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button";
 
 export function TaskActionButton({
   children,
   pendingLabel,
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+}: ButtonProps & {
   pendingLabel?: string;
 }) {
   const { pending } = useFormStatus();
