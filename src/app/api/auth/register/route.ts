@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { ensureUserAccountData } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
@@ -25,10 +26,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
+    const userId = data.user?.id ?? data.session?.user.id;
+
+    if (userId) {
+      try {
+        await ensureUserAccountData(supabase, userId, email, fullName);
+      } catch (accountError) {
+        const message = accountError instanceof Error ? accountError.message : "Unable to initialize your account.";
+        return NextResponse.json({ error: message }, { status: 500 });
+      }
+    }
+
     return NextResponse.json(
       {
         success: true,
-        userId: data.user?.id ?? null,
+        userId,
         requiresEmailConfirmation: !!data.user && !data.session,
       },
       { status: 200 },

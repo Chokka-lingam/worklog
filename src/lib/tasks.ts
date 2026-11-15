@@ -123,6 +123,7 @@ export async function createTask(formData: FormData) {
   }
 
   revalidatePath("/dashboard");
+  revalidatePath("/dashboard/tasks");
   redirect("/dashboard");
 }
 
@@ -149,6 +150,7 @@ export async function updateTaskStatus(formData: FormData) {
   }
 
   revalidatePath("/dashboard");
+  revalidatePath("/dashboard/tasks");
   redirect("/dashboard");
 }
 
@@ -167,5 +169,6 @@ export async function deleteTask(formData: FormData) {
   }
 
   revalidatePath("/dashboard");
+  revalidatePath("/dashboard/tasks");
   redirect("/dashboard");
 }
